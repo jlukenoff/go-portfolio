@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/jlukenoff/go-portfolio/blog"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -19,6 +21,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", index)
+	http.HandleFunc("/blog", blog.RenderTemplate)
 
 	fs := http.FileServer(http.Dir("client"))
 	http.Handle("/client/", http.StripPrefix("/client/", fs))
