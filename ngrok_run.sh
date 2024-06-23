@@ -11,12 +11,12 @@ cleanup() {
 # Trap EXIT signal and call cleanup function
 trap cleanup EXIT
 
-# Start ngrok
-ngrok http --domain="$NGROK_DOMAIN" "$PORT" > /dev/null &
 
 # Run the go server
+go run ./main.go > /dev/null &
 
-go run ./main.go
+# Start ngrok
+ngrok http --domain="$NGROK_DOMAIN" "$PORT"
 
 # Keep script running to maintain ngrok process
 wait
