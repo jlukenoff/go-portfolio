@@ -1,11 +1,12 @@
 #! /usr/bin/env bash
 
-#!/bin/bash
+PORT=8080
+NGROK_DOMAIN="sought-toucan-together.ngrok-free.app"
 
 # Function to kill ngrok process
 cleanup() {
   echo "Cleaning up..."
-  kill $(jobs -p)
+  kill "$(jobs -p)"
 }
 
 # Trap EXIT signal and call cleanup function
