@@ -12,7 +12,7 @@ import (
 )
 
 func renderDefaultTemplate(w http.ResponseWriter) {
-	tpl, err := template.ParseFiles("client/index.html")
+	tpl, err := template.ParseFiles("static/index.html")
 	if err != nil {
 		log.Fatal(err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -31,8 +31,8 @@ func main() {
 		renderDefaultTemplate(w)
 	})
 
-	fs := http.FileServer(http.Dir("client"))
-	http.Handle("/client/", http.StripPrefix("/client/", fs))
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	port := os.Getenv("PORT")
 
