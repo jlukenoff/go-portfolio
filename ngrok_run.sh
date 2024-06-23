@@ -17,7 +17,7 @@ trap cleanup EXIT
 go run ./main.go > /dev/null &
 
 # Start ngrok
-ngrok http --domain="$NGROK_DOMAIN" "$PORT"
+ngrok http --domain "$NGROK_DOMAIN" "$PORT"
 
 # Keep script running to maintain ngrok process
 wait
