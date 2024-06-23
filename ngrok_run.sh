@@ -1,11 +1,22 @@
 #! /usr/bin/env bash
 
-NGROK_DOMAIN='sought-toucan-together.ngrok-free.app'
-PORT=80
+#!/bin/bash
+
+# Function to kill ngrok process
+cleanup() {
+  echo "Cleaning up..."
+  kill $(jobs -p)
+}
+
+# Trap EXIT signal and call cleanup function
+trap cleanup EXIT
 
 # Start ngrok
 ngrok http --domain="$NGROK_DOMAIN" "$PORT" > /dev/null &
 
-# Start the go server
-go run main.go
+# Run the go server
 
+go run ./main.go
+
+# Keep script running to maintain ngrok process
+wait
